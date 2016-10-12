@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Secciones y líneas generales de un documento HTML5
+</title>
+<style type="text/css">
+@font-face {
+    font-family: 'Robo';
+    src: url('Roboto-LightItalic.ttf');
+}
+
+	.code{
+		background: grey;
+    padding: 10px;
+	}
+	h3{
+		color: red;
+	}
+  body{
+    font-family: 'Robo', cursive;
+    background: #62c8e6;
+  }
+	#content{
+    background: -webkit-linear-gradient(#0f0, #06f); /* For Safari 5.1 to 6.0 */
+background: -o-linear-gradient(#0f0, #06f); /* For Opera 11.1 to 12.0 */
+background:  -moz-linear-gradient(#0f0, #06f);/* For Firefox 3.6 to 15 */
+background: linear-gradient(#0f0, #06f); /* Standard syntax */
+margin: 0 auto;
+width: 60%;
+border-radius: 62px 62px 62px 62px;
+-moz-border-radius: 62px 62px 62px 62px;
+-webkit-border-radius: 62px 62px 62px 62px;
+border: 0px solid #000000;
+  padding: 30px;
+	}
+  #marco {
+    background-color: white;
+    padding: 10px;
+    margin: 85px;
+    border: 3px solid black;
+}
+
+#contenedor {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -webkit-flex-wrap: wrap;
+    flex-wrap:wrap;
+}
+
+.vertical {
+  padding:3px; 
+  border:1px solid black;
+  background-color:white;
+  width:370px;
+  height:400px;
+}
+
+.horizontal {
+  border:1px solid white;
+  background-color:white;
+  width:300px;
+  height:196px;
+}
+</style>
+</head>
+<body>
+<a href="../index.html">Atras</a>
+<header>
+   <h1>Página personal de Mauricio Pinto
+</h1>
+<h3>Aprendiendo HTML5</h3>
+</header>
+<div>
+<article>
+    <p>Aprender a programar nos abre muchas puertas. Es necesario saber el siguiente codigo:</p>
+</article>	
+</div>
+
+<div>
+<article id="content">
+
+<h4>Definiendo secciones en HTML5</h4>
+
+<h4>Ejemplo</h4>
+  <p>
+&lt;section&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Forest elephants&lt;/h1&gt;<br>
+&lt;section&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Introduction&lt;/h1&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;In this section, we discuss the lesser known forest elephants.<br>
+&lt;/section&gt;<br>
+&lt;section&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Habitat&lt;/h1&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Forest elephants do not live in trees but among them.<br>
+&lt;/section&gt;<br>
+&lt;aside&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;advertising block<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/aside&gt;<br>
+&lt;/section&gt;<br>
+&lt;footer&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;(c) 2010 The Example company<br>
+&lt;/footer&gt; <br>
+  </p>
+</article>  
+</div>
+<br>
+<br>
+<div class='code'>
+<article>
+<h3>La importancia HTML5</h3>
+    <p>La especificación HTML5 trae muchos nuevos elementos a los desarrolladores web, permitiéndoles describir la estructura de un documento web con semántica estandarizada. Este documento describe estos elementos y cómo usarlos para definir el perfil de cualquier documento.</p>
+    <nav>
+    <ol>
+        <li> <strong>Puedes crear webs sencillas: </strong> Ya sea una página web personal o para tu negocio, tener una web propia te da una presencia online y cierto grado de profesionalidad. Tendrás un sitio al que apuntar a tus contactos y como eres tú el que controla totalmente el contenido, serás capaz de transmitir el tipo de imagen que deseas.</li>
+        <li><strong>Puedes jugar con el código de otras páginas: </strong> La mayoría de navegadores web modernos incorporan herramientas para desarrolladores con las que podremos hacer sencillos cambios, como alterar el texto de la página, colores, imágenes o lo que se nos ocurra. Esos cambios solo son visibles en tu PC, lo que permite crear un entorno de aprendizaje sin dañar la verdadera página web. Herramientas como esta son geniales tanto para aprender como para descubrir si te interesan este tipo de tecnologías.</li>
+        <li><strong>Sirve para escribir en Internet: </strong> Si tienes un blog o escribes en alguno de vez en cuando, sabes de lo que estoy hablando. Es totalmente cierto que podemos usar los formularios de texto para introducir los elementos que de los que queremos hablar, pero el control absoluto del contenido no hay otra forma de obtenerlo si no eres capaz de escribir en el lenguaje HTML.</li>
+        <li><strong>Incrustar contenido de otras web: </strong> Muchas páginas tienen la opción de compartir una parte del contenido en otras webs, como son Youtube o Asciinema de la que ya hemos hablado anteriormente. Ser capaces de editar la forma en la que otra gente va a ver el contenido puede sernos de utilidad. Por ejemplo, quizá queramos compartir unos segundos concretos de un vídeo o simplemente queremos que el reproductor haga juego con la web que lo rodea.</li>
+        <li><strong>Es una puerta a cosas más avanzadas: </strong>Una vez que ya sabemos un poco de HTML y CSS quizá queramos darle un poco de interacción a nuestra página web, para lo que aprenderemos por ejemplo JavaScript. Entonces es posible que queramos que el contenido se genere dinámicamente y sea capaz de guardar cierta información, por lo que miraremos PHP y MySQL o cualquier otra alternativa. </li>
+    </ol>
+	</nav>
+</article>	
+</div>
+
+<div  id='marco'>
+  <div id="contenedor">
+<picture class="vertical">
+  
+  <source
+    media="(min-width: 600px)"
+    srcset="shaum3.jpg">
+  <source
+    media="(min-width: 400px)"
+    srcset="shaum2.jpg">
+    <source
+    media="(min-width: 300px)"
+    srcset="shaum1.jpg">
+  <img class='vertical'
+    src="shaum1.jpg"
+    alt="shaum">
+</picture>
+<iframe class="vertical" src="https://www.youtube.com/embed/85MppyLJHz0"  allowfullscreen></iframe>
+  <!--  <div class="vertical">
+      <video class="horizontal" >
+        <source src="MOOC.mov" type="video/mp4">
+      </video>
+     
+    </div>-->
+
+    <div class="vertical">
+      <object class="vertical" type="image/svg+xml" 
+                                   data="Moire_Circles.svg"></object>
+    </div>
+  </div>
+</div>
+
+<footer>Fin de página</footer>
+</body>
+</html>
