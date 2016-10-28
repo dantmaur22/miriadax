@@ -1,0 +1,122 @@
+ <!DOCTYPE html><html>
+<head>
+  <title>Date</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <h1 id="h1"></h1>
+  <h1 id="name"></h1>
+  <div id="fecha"></div>
+  <br>
+  <div id="contenido"></div>
+  Valor <input type="text" id="valor"/>
+  Resultado  <input type="text" id="resultado"/>
+  <button onclick="cuadrado()" >1.1) x^2 (número elevado al cuadrado)</button>
+  <button onclick="inverso()" >1.2) 1/x (inverso del número)</button>
+  <button onclick="raiz()" >1.3) sqrt(x) (raiz cuadrada del número)</button>
+  <button onclick="parte_entera()" >1.4) Parte entera</button>
+   <div id="contenido1"></div>
+  Valor 1<input type="text" id="valor1"/>  Valor 2<input type="text" id="valor2"/>  Resultado  <input type="text" id="resultado1"/>
+   <button onclick="operaciones(1)" >2.1) + </button>
+   <button onclick="operaciones(2)" >2.2) - </button>
+   <button onclick="operaciones(3)" >2.3) * </button>
+   <button onclick="operaciones(4)" >2.4) / </button>
+   <button onclick="potencia()" >2.5) potencia </button>
+ <script type="text/javascript">
+  var fecha = new Date();
+  var msj;
+  var cont='1) Operaciones unitarias (con un solo operando): <br>';
+  var cont1='2) Operaciones binarias (con dos operandos): <br>';
+  var name='Bienvenido a la calculadora de  Mauricio Dante Pinto Marquez';
+  if      (fecha.getHours() < 7)  { msj = "Buenas noches";}
+  else if (fecha.getHours() < 12) { msj = "Buenos días";}
+  else if (fecha.getHours() < 21) { msj = "Buenas tardes";}
+  else                                          { msj = "Buenas noches";}
+
+
+    function cuadrado(){
+        var value=document.getElementById("valor").value;
+        var resultado = Math.pow(value,2);
+        document.getElementById("resultado").value    = resultado;
+    
+    }
+    
+    function inverso(){
+        var value=document.getElementById("valor").value;
+          var resultado = 1/value;
+        document.getElementById("resultado").value    = resultado;
+    }
+    
+    function raiz(){
+        var value=document.getElementById("valor").value;
+          var resultado = Math.sqrt(value);
+        document.getElementById("resultado").value    = resultado;
+    }
+    
+    function parte_entera(){
+        var value=document.getElementById("valor").value;
+        if(value>=0){
+           var resultado = Math.floor(value);
+        }else{
+           var resultado = Math.ceil(value);          
+        }
+
+        document.getElementById("resultado").value    = resultado;
+    }
+    
+    function operaciones(type){
+        switch(type){
+            case 1:
+                 var value1=document.getElementById("valor1").value;
+                 var value2=document.getElementById("valor2").value;
+                   var resultado = parseFloat(value1) + parseFloat(value2);
+        document.getElementById("resultado1").value    = resultado;
+                break;
+            case 2:
+                var value1=document.getElementById("valor1").value;
+                 var value2=document.getElementById("valor2").value;
+                   var resultado = value1 - value2;
+        document.getElementById("resultado1").value    = resultado;
+                break;
+            case 3:
+                var value1=document.getElementById("valor1").value;
+                 var value2=document.getElementById("valor2").value;
+                   var resultado = value1 * value2;
+        document.getElementById("resultado1").value    = resultado;
+                break;
+            case 4:
+                var value1=document.getElementById("valor1").value;
+                 var value2=document.getElementById("valor2").value;
+                   var resultado = value1 / value2;
+        document.getElementById("resultado1").value    = resultado;
+                break;
+        }
+        
+    }
+    
+    function potencia(){
+        var value1=document.getElementById("valor1").value;
+                 var value2=document.getElementById("valor2").value;
+                   var resultado = Math.pow(value1,value2);
+        document.getElementById("resultado1").value    = resultado;
+    }
+    
+  document.getElementById("name").innerHTML    = name;
+  document.getElementById("h1").innerHTML    = msj;
+  document.getElementById("fecha").innerHTML = fecha;
+  document.getElementById("contenido").innerHTML = cont;
+  document.getElementById("contenido1").innerHTML = cont1;
+//  
+//  
+//  
+//  var c1 = 'a) Contenido de innerHTML de elemento identificado por id="h2" <br>' + document.getElementById("h2").innerHTML +'<br>';
+//  var c2 = 'b) Contenido de outerHTML de elemento identificado por id="h1" <br>' + document.getElementById("h1").outerHTML +'<br>';
+//  var c3 = 'c) Contenido de de la propiedad global: location.href <br>' + location.href +'<br>';
+//  var c4 = 'd) Contenido de de la propiedad global: location <br>' + location +'<br>';
+//  var c5 = 'e) Contenido de de las propiedades globales: screen.width y screen.heigth <br>' + screen.width +' - '+ screen.height +'<br>';
+//  document.getElementById("contenido").innerHTML = c1+c2+c3+c4+c5;
+  
+</script>
+</body>
+</html>
+

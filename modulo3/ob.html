@@ -1,0 +1,37 @@
+ <!DOCTYPE html><html>
+<head>
+  <title>Date</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <h1 id="h1"></h1>
+  <h1 id="name"></h1>
+  <h2 id="h2">La fecha y la hora son:</h2>
+  <div id="fecha"></div>
+  <br>
+  <div id="contenido"></div>
+
+ <script type="text/javascript">
+  var fecha = new Date();
+  var msj;
+  var name='Mauricio Dante Pinto Marquez';
+  if      (fecha.getHours() < 7)  { msj = "Buenas noches";}
+  else if (fecha.getHours() < 12) { msj = "Buenos días";}
+  else if (fecha.getHours() < 21) { msj = "Buenas tardes";}
+  else                                          { msj = "Buenas noches";}
+
+  document.getElementById("name").innerHTML    = name;
+  document.getElementById("h1").innerHTML    = msj;
+  document.getElementById("fecha").innerHTML = fecha;
+  
+  var c1 = 'a) Contenido de innerHTML de elemento identificado por id="h2" <br>' + document.getElementById("h2").innerHTML +'<br>';
+  var c2 = 'b) Contenido de outerHTML de elemento identificado por id="h1" <br>' + document.getElementById("h1").outerHTML +'<br>';
+  var c3 = 'c) Contenido de de la propiedad global: location.href <br>' + location.href +'<br>';
+  var c4 = 'd) Contenido de de la propiedad global: location <br>' + location +'<br>';
+  var c5 = 'e) Contenido de de las propiedades globales: screen.width y screen.heigth <br>' + screen.width +' - '+ screen.height +'<br>';
+  document.getElementById("contenido").innerHTML = c1+c2+c3+c4+c5;
+  
+</script>
+</body>
+</html>
+
