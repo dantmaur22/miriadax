@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Menú collapse</title>
+    <!-- Bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  </head>
+  <body>
+  <div class="container">
+  <h1>Menú Plegable Collapse</h1>
+  <nav class="navbar navbar-inverse ">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#miMenu">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <!-- Brand, no collapsa -->
+      <a class="navbar-brand" href="#" >LOGOTIPO</a>
+    </div>
+    <div class="collapse navbar-collapse" id="miMenu">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Welcome</a></li>
+        <li><a href="#">Featured</a></li>
+        <li><a href="#">People</a></li> 
+        <li>
+			<div class="dropdown">
+			  <button  class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Music
+				<span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" >
+        <li><a href="#">Welcome</a></li>
+        <li><a href="#">Featured</a></li>
+				<li><a href="#">People</a></li>
+				<li><a href="#">Music</a></li>
+				<li><a href="#">Mixes</a></li>
+        <li><a href="#">Video</a></li>
+        <li><a href="#">Radio</a></li>
+			  </ul>
+			</div>
+		</li> 
+        <li><a href="#">Mixes</a></li>
+        <li><a href="#">Videos</a></li> 
+        <li><a href="#">Radio</a></li> 
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<p><a href="../index.html">Atras</a></p>
+</div>
+
+<script type="text/javascript" 
+        src="https://code.jquery.com/jquery-2.1.4.min.js">
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </body>
+</html>

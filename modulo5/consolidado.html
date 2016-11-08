@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Calculadora Modulo 5</title>
+<meta charset="utf-8">
+<script type="text/javascript" 
+        src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<style type="text/css">
+    
+#calculadora {
+    width: 350px;
+    /*border: 3px solid lightblue;*/
+    border: 5px solid black;
+    border-radius: 10px;
+    border-style: outset;
+    padding: 10px 0 10px 20px;
+    margin: 0 auto;
+    background: #60a8cb; /* Old browsers */
+
+}
+
+#display input {
+    width: 300px;
+    height: 80px;
+    visibility: visible;
+    border-radius: 31px 31px 31px 31px;
+    -moz-border-radius: 31px 31px 31px 31px;
+    -webkit-border-radius: 31px 31px 31px 31px;
+    border: 8px solid #000000;
+    background-color: #0bcf80;
+    border-style: inset;
+    padding-left: 16px;
+    font-size: 40px;
+    font-weight: 400;    
+}
+
+.tooltiptext {
+   /* visibility: hidden;*/
+    width: 180px;
+    background-color: white;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+#display:hover .tooltiptext {
+    visibility: visible;
+}
+
+#teclas button {
+    width: 60px;
+    height: 60px;
+    color: black;
+    background-color: black;
+    margin: 2px auto;
+    border: 2px;
+    border-radius: 40%;
+    border-style: outset;
+    font-size: 20px;
+    font-weight: 400;
+    background: #f85032; /* Old browsers */
+    background: -moz-linear-gradient(top,  #f85032 0%, #f16f5c 50%, #f6290c 51%, #f02f17 71%, #e73827 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #f85032 0%,#f16f5c 50%,#f6290c 51%,#f02f17 71%,#e73827 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #f85032 0%,#f16f5c 50%,#f6290c 51%,#f02f17 71%,#e73827 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+</style>    
+
+<script type="text/javascript">
+ 
+/*Eventos On Click*/    
+$(document).ready(function () {
+    'use strict';
+    $("#TxtNumero").on("click",   function () {   clear();       });
+    $("#BotonMas").on("click",    function () {   chgOper("+");  });
+    $("#BotonMenos").on("click",  function () {   chgOper("-");  });
+    $("#BotonMult").on("click",   function () {   chgOper("*");  });
+    $("#BotonDiv").on("click",    function () {   chgOper("/");  });
+    $("#BotonTot").on("click",    function () {   calcular();    });
+    $("#BotonXeY").on("click",    function () {   chgOper("X^Y");});
+    
+    $("#BotonCuad").on("click",   function () {
+                                                var num = $("#TxtNumero");
+                                                num.val(+num.val() * +num.val());
+                                                oper = undefined;
+                                            });
+
+    $("#Boton2eN").on("click",    function () {
+                                                chgOper("X^Y");
+                                                $("#TxtNumero").val("2");
+                                                calcular();
+                                            });
+
+    $("#BotonInvX").on("click",   function () {
+                                                var num = $("#TxtNumero");
+                                                num.val(1 / num.val());
+                                                oper = undefined;
+                                            });
+    $("#BotonSqrt").on("click",   function () {
+                                                var num = $("#TxtNumero");
+                                                num.val(Math.sqrt(num.val()));
+                                                oper = undefined;
+                                            });
+    $("#BotonPEnt").on("click",   function () {
+                                                var num = $("#TxtNumero");
+                                                num.val(entero(+num.val()));
+                                                oper = undefined;
+                                            });
+    $("#BotonNFact").on("click",  function () {
+                                                var i = 0,
+                                                num = $("#TxtNumero"),
+                                                x = entero(+num.val());
+                                                for (i = x - 1; i > 1; i -= 1) {
+                                                    x = (x * i);
+                                                }
+                                                num.val(x);
+                                                oper = undefined;
+                                            });
+   $("#BotonCls").on("click",    function () {
+                                                clear();
+                                                oper = undefined;
+                                            });
+    /* Operaciones con cadenas CVS */
+    $("#BotonCsvE").on("click", function () {
+                                                var i = 0,
+                                                    x = 0,
+                                                    num = $("#TxtNumero"),
+                                                    Lista = num.val().replace(/([;])/g, ',').split(',');
+                                                while (i< Lista.length)
+                                                       x += parseInt(Lista[i++]);
+                                                num.val(x);
+                                                oper = undefined;
+                                            });
+
+    $("#BotonCsvProd").on("click",function () {
+                                                var i = 0,
+                                                    x = 1,
+                                                    num = $("#TxtNumero"),
+                                                    Lista = num.val().replace(/([;])/g, ',').split(',');
+                                                while (i< Lista.length)
+                                                       x *= parseInt(Lista[i++]);
+                                                num.val(x);
+                                                oper = undefined;
+                                            });
+});
+
+/*Funciones Llamadas*/
+/* El modo estricto <use strict> hace varios cambios en la semántica normal de JavaScript. Primero, modo estricto elimina algunos errores silenciosos de JavaScript haciendo a que lancen excepciones. Segundo, modo estricto corrige errores que hacen que sea difícil para los motores de JavaScript realizar optimizaciones: código de modo estricto a veces puede correr más rápido que el código idéntico que no es estricto. Tercero, el modo estricto prohibe cierta sintáxis que es probable que sea definida en futuras versiones de ECMAScript*/
+
+var oper = "",
+    acum = "";
+
+function clear() {
+    'use strict';
+    var num = $("#TxtNumero");
+    num.val("");
+}
+
+function entero(valor) {
+    'use strict';
+    return (+valor >= 0 ? Math.floor(+valor) : Math.ceil(+valor));
+}
+
+function addNum(digito) {
+    'use strict';
+    var num = $("#TxtNumero");
+    if (oper === undefined) {
+        clear();
+        oper = "";
+    }
+    num.val(num.val() + digito);
+}
+
+function chgOper(operacion) {
+    'use strict';
+    oper = operacion;
+    acum = $("#TxtNumero").val();
+    clear();
+}
+
+function calcular() {
+    'use strict';
+    var total = 0,
+        num = $("#TxtNumero"),
+        valor = num.val();
+    /*isNaN intenta convertir el parámetro pasado a un número. Si el parámetro no se puede convertir, devuelve true; en caso contrario, devuelve false.*/
+    if (acum === "" || oper === "" || isNaN(valor)) {
+        return false;
+    }
+
+    if (valor === "") {
+        valor = +acum;
+    }
+
+    if (oper === "X^Y") {
+        total = Math.pow(+acum, +valor);
+    } else {
+       /* La función eval habilita la ejecución dinámica de código fuente de JavaScript*/
+        total = eval(acum + oper + valor);
+    }
+
+    num.val(total);
+    oper = undefined;  /*Inicializar*/
+}
+</script>
+</head>
+<body>
+    <div id="calculadora">
+       
+        <p id="display" class="tooltip">
+            <input value="0" size="36" id="TxtNumero" type="text">
+            <span class="tooltiptext">Operaciones unitarias (con un solo operando)<br>Operaciones binarias (con dos operandos)<br>Operaciones en Formato CSV: n,n,n,...</span>
+            <span id="msj"></span>
+        </p>
+        <p id="teclas">
+            <button id="BotonMas">+</button>
+            <button id="BotonMenos">-</button>
+            <button id="BotonMult">*</button>
+            <button id="BotonDiv">/</button>
+            <button id="BotonTot">=</button>
+            <button id="BotonXeY">X<sup>y</sup></button>
+            <button id="BotonCuad">X<sup>2</sup></button>
+            <button id="Boton2eN">2<sup>n</sup></button>
+            <button id="BotonInvX">1/x</button>
+            <button id="BotonSqrt">&#8730<sup>2</sup></button>
+            <button id="BotonPEnt">Ent</button>
+            <button id="BotonNFact">n!</button>
+            <button id="BotonCsvE">csv.Ʃ</button>
+            <button id="BotonCsvProd">csv.*</button>
+            <button id="BotonCls">C</button>                
+        </p>
+    </div>
+</body></html>

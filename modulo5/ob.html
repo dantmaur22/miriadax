@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Modulo 5 Tarea Obligatoria "Calculadora DOM"</title>
+<meta charset="utf-8">
+<script type="text/javascript" 
+        src="https://code.jquery.com/jquery-2.1.4.min.js">
+</script>
+<script type="text/javascript">
+    var num, acc = 0;
+    
+    var op = "";
+    var op2 = ""; 
+   
+  $(function(){ 
+    var vBotCal = $('#BotCal');
+    var vBotSum = $('#BotSum');
+    var vBotRes = $('#BotRes');
+    var vBotMul = $('#BotMul');
+    var vBotDiv = $('#BotDiv');
+    var vBotCua = $('#BotCua');
+    var vBotInv = $('#BotInv');
+    var vBotRai = $('#BotRai');
+    var vBotEnt = $('#BotEnt');
+    var vBot2aN = $('#Bot2aN');
+    var vBotNfc = $('#BotNfc');
+    var vBotSumLst = $('#BotSumLst');
+    var vBotMulLst = $('#BotMulLst');
+    var vBotonSuma = $('#BotonSuma');
+    var vBotonResta = $('#BotonResta');
+    var vBotonMultiplica = $('#BotonMultiplica');
+    var vBotonDivide = $('#BotonDivide');
+    var vBotonElevado = $('#BotonElevado');
+    var vBotonCalculo2 = $('#BotonCalculo2');
+
+    Inicializar();
+/*  Se definen la funciones para el evento click para cada uno de lo botones */
+    vBotSum.on('click', function()
+                    { acc = num.value;  op = "+"; 
+                      BotonesGrises();
+                      vBotSum.css("background-color","yellow");
+                    });
+    vBotRes.on('click', function()
+                    { acc = num.value;  op = "-"; 
+                      BotonesGrises();
+                      vBotRes.css("background-color","yellow");
+                    });      
+    vBotMul.on('click', function()
+                    { acc = num.value;  op = "*"; 
+                      BotonesGrises();
+                      vBotMul.css("background-color","yellow");
+                    });      
+    vBotDiv.on('click', function()
+                    { acc = num.value;  op = "/"; 
+                      BotonesGrises();
+                      vBotDiv.css("background-color","yellow");
+                    });     
+    vBotCua.on('click', function()
+                    { acc = num.value;  op = "2"; 
+                      BotonesGrises();
+                      vBotCua.css("background-color","yellow");
+                    });    
+    vBotInv.on('click', function()
+                    { acc = num.value;  op = "1"; 
+                      BotonesGrises();
+                      vBotInv.css("background-color","yellow");
+                    });    
+    vBotRai.on('click', function()
+                    { acc = num.value;  op = "r"; 
+                      BotonesGrises();
+                      vBotRai.css("background-color","yellow");
+                    });    
+    vBotEnt.on('click', function()
+                    { acc = num.value;  op = "E"; 
+                      BotonesGrises();
+                      vBotEnt.css("background-color","yellow");
+                    });    
+    vBot2aN.on('click', function()
+                    { acc = num.value;  op = "n"; 
+                      BotonesGrises();
+                      vBot2aN.css("background-color","yellow");
+                    });    
+    vBotNfc.on('click', function()
+                    { acc = num.value;  op = "f"; 
+                      BotonesGrises();
+                      vBotNfc.css("background-color","yellow");
+                    });    
+    vBotCal.on('click', function()
+                    { calcular();
+                      BotonesGrises();
+                      vBotCal.css("background-color","yellow");
+                    });    
+
+
+    vBotonSuma.on('click', function()
+                    { acc = parseInt(num1.value) + parseInt(num2.value); 
+                      num3.value = acc; 
+                      op2 = "+";
+                      BotonesGrises2();
+                      vBotonSuma.css("background-color","yellow");
+                    });    
+    vBotonResta.on('click', function()
+                    { acc = parseInt(num1.value) - parseInt(num2.value); 
+                      num3.value = acc; 
+                      op2 = "-";
+                      BotonesGrises2();
+                      vBotonResta.css("background-color","yellow");
+                    });    
+    vBotonMultiplica.on('click', function()
+                    { acc = parseInt(num1.value) * parseInt(num2.value); 
+                      num3.value = acc; 
+                      op2 = "*";
+                      BotonesGrises2();
+                      vBotonMultiplica.css("background-color","yellow");
+                    });    
+    vBotonDivide.on('click', function()
+                    { acc = parseInt(num1.value) / parseInt(num2.value); 
+                      num3.value = acc; 
+                      op2 = "/";
+                      BotonesGrises2();
+                      vBotonDivide.css("background-color","yellow");
+                    });    
+    vBotonElevado.on('click', function()
+                    { acc  = Math.pow(num1.value,num2.value);
+                      num3.value = acc; 
+                      op2 = "2";
+                      BotonesGrises2();
+                      vBotonElevado.css("background-color","yellow");
+                    });    
+    vBotonCalculo2.on('click', function()
+                    { calcular2();
+                      num3.value = acc; 
+                      BotonesGrises2();
+                      vBotonCalculo2.css("background-color","yellow");
+                    });    
+
+    vBotSumLst.on('click', function()
+                    { BotonesGrises3();
+                      vBotSumLst.css("background-color","yellow");
+                      calcular3();
+                    });    
+    vBotMulLst.on('click', function()
+                    { BotonesGrises3();
+                      vBotMulLst.css("background-color","yellow");
+                      calcular3();
+                    });    
+   
+  
+/* Se definen la funciones para cuando se de click en cada uno de los cajas de texto*/
+    $("#num").on ('click', function()
+                     { 
+                       $("#num").val("");
+                     });
+    $("#num1").on ('click', function()
+                     { 
+                       $("#num1").val("");
+                       $("#num3").val("");
+                     });
+    $("#num2").on ('click', function()
+                     { 
+                       $("#num2").val("");
+                       $("#num3").val("");
+                     });
+    $("#num3").on ('click', function()
+                     { 
+                       $("#num1").val("");
+                       $("#num2").val("");
+                       $("#num3").val("");
+                       op2="";
+                     });
+    $("#num4").on ('click', function()
+                     { 
+                       $("#num4").val("");
+                       $("#num5").val("");
+                     });
+    $("#num5").on ('click', function()
+                     { 
+                       $("#num4").val("");
+                       $("#num5").val("");
+                     });
+});
+
+/*Funciones llamadas*/
+  function BotonesGrises()     {
+                       $('#BotSum').css("background-color","orange");
+                       $('#BotRes').css("background-color","orange");
+                       $('#BotMul').css("background-color","orange");
+                       $('#BotDiv').css("background-color","orange");
+                       $('#BotCua').css("background-color","orange");
+                       $('#BotInv').css("background-color","orange");
+                       $('#BotRai').css("background-color","orange");
+                       $('#BotEnt').css("background-color","orange");
+                       $('#BotCal').css("background-color","orange");
+                       $('#Bot2aN').css("background-color","orange");
+                       $('#BotNfc').css("background-color","orange");
+                      }
+  function BotonesGrises2(){
+                       $('#BotonSuma').css("background-color","orange");
+                       $('#BotonResta').css("background-color","orange");
+                       $('#BotonMultiplica').css("background-color","orange");
+                       $('#BotonDivide').css("background-color","orange");
+                       $('#BotonElevado').css("background-color","orange");
+                       $('#BotonCalculo2').css("background-color","orange");
+
+                       if (op2 === "+") {$('#BotonSuma').css("background-color","yellow")}
+                       if (op2 === "-") {$('#BotonResta').css("background-color","yellow")}
+                       if (op2 === "*") {$('#BotonMultiplica').css("background-color","yellow")}
+                       if (op2 === "/") {$('#BotonDivide').css("background-color","yellow")}
+                       if (op2 === "2") {$('#BotonElevado').css("background-color","yellow")}
+                      }      
+  function BotonesGrises3(){
+                       $('#BotSumLst').css("background-color","orange");
+                       $('#BotMulLst').css("background-color","orange");
+                      }
+
+  function calcular() {
+    if (op === "+") {num.value = (+acc + +num.value)}
+    if (op === "-") {num.value = (+acc - +num.value)}
+    if (op === "*") {num.value = (+acc * +num.value)}
+    if (op === "/") {num.value = (+acc / +num.value)}
+    if (op === "2") {num.value = (+num.value * +num.value)}
+    if (op === "1") {num.value = (+1 / +num.value)}
+    if (op === "r") {num.value = Math.sqrt(acc)}
+    if ((op === "E") && (num.value) >= 0)  {num.value = Math.floor(num.value) }
+    if ((op === "E") && (num.value) <= 0)  {num.value = -Math.ceil(num.value) }
+    if (op === "n") {num.value = Math.pow(2,+acc) }
+    if (op === "f") {
+                       var resultado = 1;
+                       for(var i=1; i<= +acc; i++) { resultado *= i; }
+                       num.value = resultado;
+                    }
+  }
+
+  function calcular2() {
+                        if (document.getElementById("BotonSuma").style.backgroundColor=== "yellow")       { acc = parseInt(num1.value) + parseInt(num2.value) }; 
+                        if (document.getElementById("BotonResta").style.backgroundColor=== "yellow")      { acc = parseInt(num1.value) - parseInt(num2.value) };  
+                        if (document.getElementById("BotonMultiplica").style.backgroundColor=== "yellow") { acc = parseInt(num1.value) * parseInt(num2.value) };
+                        if (document.getElementById("BotonDivide").style.backgroundColor=== "yellow")     { acc = parseInt(num1.value) / parseInt(num2.value) };                   
+                        if (document.getElementById("BotonElevado").style.backgroundColor=== "yellow")    { acc = Math.pow(num1.value,num2.value) };
+  }
+  function calcular3() {
+                       
+                        var inum = document.getElementById("num4");
+                        var Lista = inum.value.split(",");
+                        var i = 0, acc = 0;
+
+                        if (document.getElementById("BotSumLst").style.backgroundColor=== "yellow")       
+                           { 
+                              while (i< Lista.length)
+                                acc += parseInt(Lista[i++]);
+                              num5.value = acc;   
+                           }; 
+
+                        if (document.getElementById("BotMulLst").style.backgroundColor=== "yellow")       
+                           { 
+                              acc = 1;
+                              while (i< Lista.length)
+                                acc *=  parseInt(Lista[i++]);
+                              num5.value = acc;   
+                           }; 
+  }
+  function Inicializar() {
+                      num  = document.getElementById("num");
+                      num1 = document.getElementById("num1");
+                      num2 = document.getElementById("num2");
+                      num3 = document.getElementById("num3");
+                      num4 = document.getElementById("num4");
+                      num5 = document.getElementById("num5");
+                      BotonesGrises();
+                      BotonesGrises2();
+                      BotonesGrises3();
+}
+function ValidaDatos3() {
+
+}
+</script>
+</head>
+<body background="../img/fondo01.jpg">
+  <h1>Calculadora</h1>
+
+  <h2>Buenos Dias, Bienvenido a la Calculadora de Mauricio Pinto</h2>
+
+  <br>Integrar además en una sola calculadora los siguientes botones de operaciones matemáticas:
+  <br>Número:
+  <input  id="num" type="text" size="12"> 
+  <button id="BotCal">=</button><p>
+  <p>1) Operaciones unitarias (con un solo operando): </p>
+  <button id="BotSum">+</button>
+  <button id="BotRes">-</button>
+  <button id="BotMul">x</button>
+  <button id="BotDiv">/</button>
+  <p>1.1) x^2 (número elevado al cuadrado)</p>
+  <button id="BotCua">x<sup>2</sup></button>
+  <p>1.2) 1/x (inverso del número)</p>
+  <button id="BotInv"> 1/x </button>
+  <p>1.3) sqrt(x) (raiz cuadrada del número)</p>
+  <button id="BotRai">&#8730<sup>2</sup></button>
+  <p>1.4) parte_entera(x) (parte entera de x: si x es positivo devuelve Math.floor(x) y si es negativo devuelve -Math.ceil(x))</p>
+  <button id="BotEnt">ParteEntera(x)</button>
+  <p>1.5) 2^n (potencia n del número 2) </p>
+  <button id="Bot2aN">2<sup>n</sup></button>
+  <p>1.6) n! (factorial del número n: n*(n-1)*(n-2)*...*3*2*1) </p>
+  <button id="BotNfc">n<sup>!</sup></button>
+  <br>
+ 
+  <p>2) Operaciones Binarias (con 2 Operandos): </p>
+  <input  id="num1" type="text" size="12"> 
+  <button id="BotonSuma" >+</button>
+  <button id="BotonResta">-</button>
+  <button id="BotonMultiplica">x</button>
+  <button id="BotonDivide">/</button>
+  <button id="BotonElevado">X^Y</button>
+  <input  id="num2" type="text" size="12">  
+  <button id="BotonCalculo2">=</button>
+  <input  id="num3" type="text" size="12"> 
+  <p>2.1) +. -. *, / (suma, resta, multiplicación y división)</p>
+  <p>2.2) x^y (x elevado a y)</p>
+
+  <p>3) Operaciones con n operandos introducidos en formato CSV (Separados por coma ","):
+  <br>3.1) Sumatorio(x) (sumatorio de n números)
+  <br>3.2) Producto(x) (producto de n números)</p>         
+  <input  id="num4" type="text" size="28"> 
+  <button id="BotSumLst" >SumaLista</button>
+  <button id="BotMulLst">MultiplicaLista</button>  
+  <input  id="num5" type="text" size="28"> 
+
+  <p>4) Calculadra Consolidada
+  <br> Se consolidad ya que en el modulo 6 se usara para mostrar en un carrusel realizado con Bootstrap</p>
+  <div>
+  <iframe width="800" height="700" src="consolidado.html"  scrolling="no" frameborder="no"></iframe>
+  </div>
+  <p><a href="../index.html">atras</a></p>
+</body>
+</html>

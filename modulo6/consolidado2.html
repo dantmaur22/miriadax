@@ -1,0 +1,456 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Calculadora en Bootstrap</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+<script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style type="text/css">
+
+#sortable { 
+  list-style-type: none;
+   margin-left:auto;
+   margin-right:auto;
+}
+
+#sortable { 
+  float: left; 
+  width: 100%; 
+
+}
+
+#sortable div {
+  vertical-align:bottom;
+  width: 100%; 
+  height: auto;
+}
+
+#sortable input {
+  vertical-align:bottom;
+  width: 95%; 
+  height: auto;
+}
+
+
+#calculadora {
+    width: 350px;
+    /*border: 3px solid lightblue;*/
+    border: 5px solid black;
+    border-radius: 10px;
+    border-style: outset;
+    padding: 10px 0 10px 20px;
+    margin: 0 auto;
+    background: #60a8cb; /* Old browsers */
+
+}
+
+#display input{
+    width:  100%;
+    height: 80px;
+    visibility: visible;
+    border-radius: 31px 31px 31px 31px;
+    /* mozilla -moz-border-radius: 31px 31px 31px 31px;*/
+    -webkit-border-radius: 31px 31px 31px 31px;
+    border: 8px solid #000000;
+    background-color: #0bcf80;
+    border-style: inset;
+    padding-left: 10px;
+    font-size: 40px;
+    font-weight: 400;    
+}
+#teclas button {
+    width: 60px;
+    height: 60px;
+    color: black;
+    background-color: black;
+    margin: 2px auto;
+    border: 4px black solid;
+    border-radius: 40%;
+    border-style: outset;
+    font-size: 20px;
+    font-weight: 400;
+    background: #f85032; /* Old browsers */
+    background: -moz-linear-gradient(top,  #f85032 0%, #f16f5c 50%, #f6290c 51%, #f02f17 71%, #e73827 100%); /* FF3.6-15 */
+   /*mozilla background: -webkit-linear-gradient(top,  #f85032 0%,#f16f5c 50%,#f6290c 51%,#f02f17 71%,#e73827 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #f85032 0%,#f16f5c 50%,#f6290c 51%,#f02f17 71%,#e73827 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+#Memoria {
+        width:30px;
+        height:50px;
+        margin: 2px auto;
+        margin-left: 15px;
+        border:10px black solid;
+        padding: 10px 20px 20px 10px;
+        background: #f85032;
+    }
+ 
+label {
+    display: inline-block;
+    width: 15em;
+  }
+
+  #Total, #src_move  {
+    color: blue;
+    border: 5px solid black;
+    width: 120px;
+  /*  height: 50;  mozilla*/
+  }
+  #Mem, #dest_move {
+    border: 5px solid blue;
+    width: 120px;
+/*    height: 50;  mozilla*/
+  }
+
+@media (orientation:landscape){ #sortable {width:100vh;}}
+@media (orientation:portrait) { #sortable {width:100%;}}
+</style>
+
+
+<script>
+  $(function() {
+   $( "#sortable" ).sortable();
+   $( "#sortable" ).disableSelection();
+  });
+
+
+function dragstart_handler(ev) {
+ //console.log("dragStart");
+ // Change the source element's background color to signify drag has started
+ ev.currentTarget.style.border = "dashed";
+ // Add the id of the drag source element to the drag data payload so
+ // it is available when the drop event is fired
+ ev.dataTransfer.setData("text", ev.target.id);
+ // Tell the browser both copy and move are possible
+ ev.effectAllowed = "copyMove";
+}
+function dragover_handler(ev) {
+ //console.log("dragOver");
+ // Change the target element's border to signify a drag over event
+ // has occurred
+ ev.currentTarget.style.background = "lightblue";
+ ev.preventDefault();
+var num = $("#TxtNumero"), mem = $("#Memoria"), valor = num.val();
+    mem.val(valor);
+}
+function drop_handler(ev) {
+ // console.log("Drop");
+  ev.preventDefault();
+  // Get the id of drag source element (that was added to the drag data
+  // payload by the dragstart event handler)
+  var id = ev.dataTransfer.getData("text");
+  // Only Move the element if the source and destination ids are both "move"
+  if (id == "src_move" && ev.target.id == "dest_move")
+    ev.target.appendChild(document.getElementById(id));
+  // Copy the element if the source and destination ids are both "copy"
+  if (id == "src_copy" && ev.target.id == "dest_copy") {
+   var nodeCopy = document.getElementById(id).cloneNode(true);
+   nodeCopy.id = "newId";
+   ev.target.appendChild(nodeCopy);
+  }
+}
+function dragend_handler(ev) {
+  //console.log("dragEnd");
+  // Restore source's border
+  ev.target.style.border = "solid black";
+  // Remove all of the drag data
+  ev.dataTransfer.clearData();
+}
+</script>  
+
+
+<script type="text/javascript">
+ 
+/*Eventos On Click*/    
+$(document).ready(function () {
+    'use strict';
+
+
+    'use strict';
+
+    // PRIMERO EL TECLADO NUMÉRICO ---------------------------------------------
+
+    $("#btn1").on("click", function () {
+        addNum("1");
+    });
+
+    $("#btn2").on("click", function () {
+        addNum("2");
+    });
+
+    $("#btn3").on("click", function () {
+        addNum("3");
+    });
+
+    $("#btn4").on("click", function () {
+        addNum("4");
+    });
+
+    $("#btn5").on("click", function () {
+        addNum("5");
+    });
+
+    $("#btn6").on("click", function () {
+        addNum("6");
+    });
+
+    $("#btn7").on("click", function () {
+        addNum("7");
+    });
+
+    $("#btn8").on("click", function () {
+        addNum("8");
+    });
+
+    $("#btn9").on("click", function () {
+        addNum("9");
+    });
+
+    $("#btn0").on("click", function () {
+        addNum("0");
+    });
+
+    $("#btnDot").on("click", function () {
+        addNum(".");
+    });
+
+    
+    $("#TxtNumero").on("click",   function () {   clear();       });
+    $("#BotonMas").on("click",    function () {   chgOper("+");  });
+    $("#BotonMenos").on("click",  function () {   chgOper("-");  });
+    $("#BotonMult").on("click",   function () {   chgOper("*");  });
+    $("#BotonDiv").on("click",    function () {   chgOper("/");  });
+    $("#BotonTot").on("click",    function () {   calcular();    });
+    $("#BotonXeY").on("click",    function () {   chgOper("X^Y");});
+    
+    $("#BotonCuad").on("click",   function () {
+                                                var num = $("#TxtNumero");
+                                                num.val(+num.val() * +num.val());
+                                                oper = undefined;
+                                            });
+
+    $("#Boton2eN").on("click",    function () {
+                                                chgOper("X^Y");
+                                                $("#TxtNumero").val("2");
+                                                calcular();
+                                            });
+
+    $("#BotonInvX").on("click",   function () {
+                                                var num = $("#TxtNumero");
+                                                num.val(1 / num.val());
+                                                oper = undefined;
+                                            });
+    $("#BotonSqrt").on("click",   function () {
+                                                var num = $("#TxtNumero");
+                                                num.val(Math.sqrt(num.val()));
+                                                oper = undefined;
+                                            });
+    $("#BotonPEnt").on("click",   function () {
+                                                var num = $("#TxtNumero");
+                                                num.val(entero(+num.val()));
+                                                oper = undefined;
+                                            });
+    $("#BotonNFact").on("click",  function () {
+                                                var i = 0,
+                                                num = $("#TxtNumero"),
+                                                x = entero(+num.val());
+                                                for (i = x - 1; i > 1; i -= 1) {
+                                                    x = (x * i);
+                                                }
+                                                num.val(x);
+                                                oper = undefined;
+                                            });
+   $("#BotonCls").on("click",    function () {
+                                                clear();
+                                                oper = undefined;
+                                            });
+    /* Operaciones con cadenas CVS */
+    $("#BotonCsvE").on("click", function () {
+                                                var i = 0,
+                                                    x = 0,
+                                                    num = $("#TxtNumero"),
+                                                    Lista = num.val().replace(/([;])/g, ',').split(',');
+                                                while (i< Lista.length)
+                                                       x += parseInt(Lista[i++]);
+                                                num.val(x);
+                                                oper = undefined;
+                                            });
+
+    $("#BotonCsvProd").on("click",function () {
+                                                var i = 0,
+                                                    x = 1,
+                                                    num = $("#TxtNumero"),
+                                                    Lista = num.val().replace(/([;])/g, ',').split(',');
+                                                while (i< Lista.length)
+                                                       x *= parseInt(Lista[i++]);
+                                                num.val(x);
+                                                oper = undefined;
+                                            });
+
+   $("#BotonMad").on("click",    function () { 
+                                                var num = $("#TxtNumero"),
+                                                    mem = $("#Memoria"),
+                                                    valor = num.val();
+                                                mem.val(valor);
+                                                oper = undefined;
+                                            });
+
+   $("#BotonMrc").on("click",    function () { 
+                                                var num = $("#TxtNumero"),
+                                                    mem = $("#Memoria"),
+                                                    valor = mem.val();
+                                                num.val(valor);
+                                                oper = undefined;
+                                            });
+
+});
+
+
+
+var oper = "",
+    acum = "";
+
+function clear() {
+    'use strict';
+    var num = $("#TxtNumero");
+    num.val("");
+}
+
+function entero(valor) {
+    'use strict';
+    return (+valor >= 0 ? Math.floor(+valor) : Math.ceil(+valor));
+}
+
+function addNum(digito) {
+    'use strict';
+    var num = $("#TxtNumero");
+    if (oper === undefined) {
+        clear();
+        oper = "";
+    }
+    num.val(num.val() + digito);
+}
+
+function chgOper(operacion) {
+    'use strict';
+    oper = operacion;
+    acum = $("#TxtNumero").val();
+    clear();
+}
+
+function calcular() {
+    'use strict';
+    var total = 0,
+        num = $("#TxtNumero"),
+        valor = num.val();
+    /*isNaN intenta convertir el parámetro pasado a un número. Si el parámetro no se puede convertir, devuelve true; en caso contrario, devuelve false.*/
+    if (acum === "" || oper === "" || isNaN(valor)) {
+        return false;
+    }
+
+    if (valor === "") {
+        valor = +acum;
+    }
+
+    if (oper === "X^Y") {
+        total = Math.pow(+acum, +valor);
+    } else {
+       /* La función eval habilita la ejecución dinámica de código fuente de JavaScript*/
+        total = eval(acum + oper + valor);
+    }
+
+    num.val(total);
+    oper = undefined;  /*Inicializar*/
+}
+</script>
+
+
+</head>
+<body>
+
+<div class="container">
+<nav class="navbar navbar-inverse ">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#miMenu">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand" href="../index.html">Principal</a>
+    </div>
+    <div class="collapse navbar-collapse" id="miMenu">
+      <ul class="nav navbar-nav">
+        <li><a href="ob.html">Inicio</a></li>
+        <li><a href="puzzle.html">Puzzle</a></li> 
+        <li class="active"><a href="#">Calculadora</a></li>
+        <li><a href="#">Frases</a></li> 
+        <li><a href="#">Temporizador</a></li> 
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="ejercicio">
+  <ul id="sortable">
+    <div id="calculadora">
+        <div id="display">
+          <label>Ingrese Numero(s en csv)</label>
+          <div draggable="true" id="Total" ondragstart="dragstart_handler(event);" ondragend="dragend_handler(event);">
+          <input id="TxtNumero" type="text">
+          </div>
+          <span  class="tooltiptext"><br>Operaciones unitarias (con un solo operando)<br>Operaciones binarias (con dos operandos)<br>Operaciones en Formato CSV: n,n,n,...</span>
+          <span  id="msj"></span>
+        </div>
+        <div id="Mem" ondrop="drop_handler(event);" ondragover="dragover_handler(event);">
+        <p><label for="Memoria">Memoria:</label><input id="Memoria" title="Es este campo se guarda la Memoria"></p>
+        </div>
+        <div class = "form-group">
+        <p id="teclas">
+                <button id="btn1">1</button>
+                <button id="btn2">2</button>
+                <button id="btn3">3</button>
+                <button id="btn4">4</button>
+                <button id="btn5">5</button>
+                <button id="btn6">6</button>
+                <button id="btn7">7</button>
+                <button id="btn8">8</button>
+                <button id="btn9">9</button>
+                <button id="btn0">0</button>
+                <button id="btnDot">.</button>        
+            <button id="BotonMas">+</button>
+            <button id="BotonMenos">-</button>
+            <button id="BotonMult">*</button>
+            <button id="BotonDiv">/</button>
+            <button id="BotonTot">=</button>
+            <button id="BotonXeY">X<sup>y</sup></button>
+            <button id="BotonCuad">X<sup>2</sup></button>
+            <button id="Boton2eN">2<sup>n</sup></button>
+            <button id="BotonInvX">1/x</button>
+            <button id="BotonSqrt">&#8730<sup>2</sup></button>
+            <button id="BotonPEnt">Ent</button>
+            <button id="BotonNFact">n!</button>
+            <button id="BotonCsvE">csv.Ʃ</button>
+            <button id="BotonCsvProd">csv.*</button>
+            <button id="BotonCls">C</button>                
+            <button id="BotonMad">M<sup>+</sup></button>                
+            <button id="BotonMrc">M<sup>r</sup></button>                
+        </p>
+        </div>
+    </ul>
+
+  </div>
+  <div class="clear"> </div>
+</div>
+
+</div>
+
+</body>
+</html>
+
